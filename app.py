@@ -3,7 +3,7 @@ from tensorflow.keras.models import load_model
 import numpy as np
 
 app = Flask(__name__)
-model = load_model("my_model")  # Ensure this folder is included
+model = load_model("my_model/my_model.keras")  # Ensure this folder is included
 
 @app.route('/predict', methods=['POST'])
 def predict():

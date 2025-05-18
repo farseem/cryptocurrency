@@ -12,8 +12,8 @@ def predict():
     features = np.array(data['features'])
 
     # Validate shape
-    if features.shape != (20, 14):
-        return jsonify({"error": f"Invalid input shape: expected (20, 14), got {features.shape}"}), 400
+    if features.shape != (1, 20, 14):
+        return jsonify({"error": f"Invalid input shape: expected (1, 20, 14), got {features.shape}"}), 400
 
     # Expand to batch shape (1, 20, 14)
     input_array = np.expand_dims(features, axis=0)

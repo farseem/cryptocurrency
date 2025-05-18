@@ -1,9 +1,20 @@
 from flask import Flask, request, jsonify
 from tensorflow.keras.models import load_model
 import numpy as np
+import os
 
 app = Flask(__name__)
-model = load_model("my_model/my_model.keras")  # Ensure this folder is included
+
+# Declare model globally (not loaded here)
+model = None
+
+# ✅ Lazy loading the model only once on first request
+@app.before_first_request
+def load_model_once():
+    global model
+    if model is None:
+        model = load_model("my_model/my_model.keras")
+        print("Model loaded.")
 
 @app.route('/predict', methods=['POST'])
 def predict():

@@ -5,6 +5,11 @@ import numpy as np
 app = Flask(__name__)
 model = load_model("my_model/my_model.keras")  # Ensure this folder is included
 
+
+@app.route("/ping")
+def home():
+    return "API is up and running 🎉", 200
+
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.get_json()
